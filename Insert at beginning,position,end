@@ -1,0 +1,96 @@
+class SingleLinkedList {
+    // Node class
+    static class Node {
+        int data;
+        Node next;
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node head = null;
+
+    // Insert node at the end
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
+    }
+    public void insertAtBeggining(int data)
+    {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+    public void insertAtIndex(int position,int data)
+    {
+        if(position<1)
+        {
+            System.out.println("invalid position");
+        }
+        Node newNode = new Node(data);
+        if(position == 1)
+        {
+            newNode.next = head;
+            head = newNode;
+        }
+        else
+        {
+            Node temp = head;
+            for(int i =0;i<position-1 && temp != null ;i++)
+            {
+                temp = temp.next;
+            }
+            if(temp == null)
+            {
+                System.out.println("position is out of bound");
+            }
+            else
+            {
+                newNode.next = temp.next;
+                temp.next = newNode;
+            }
+        }
+    }
+
+    // Display the list
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    // Delete node from the start
+    public void delete() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        head = head.next;
+    }
+
+    public static void main(String[] args) {
+        SingleLinkedList list = new SingleLinkedList();
+        list.insert(10);
+        list.insert(20);
+        list.insert(30);
+        list.insertAtBeggining(40);
+        list.insertAtIndex(2,90);
+        list.display(); // Output: 10 20 30 // Output: 20 30
+    }
+}
